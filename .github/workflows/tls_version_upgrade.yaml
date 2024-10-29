@@ -36,11 +36,6 @@ jobs:
         # Verify Docker is installed in your custom image
         docker --version
 
-    - name: Set up Docker client
-      run: |
-        # Verify Docker is installed in your custom image
-        docker --version
-
     - name: azure login using action
       uses: azure/login@v1
       with:
