@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest # This sets up a GitHub-hosted runner.
 
     container:
-      image: dockerofkrishnadhas/jenkins-slave-tf-deploy-jdk11-image:latest # Replace with your own Docker image.
+      image: dockerofkrishnadhas/jenkins-slave-dind-jdk21-image:latest # Replace with your own Docker image.
 
     steps:
     - name: Checkout code
