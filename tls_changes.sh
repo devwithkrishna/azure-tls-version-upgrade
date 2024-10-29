@@ -13,6 +13,12 @@ if [[ $# -ne 3 ]]; then
   exit 1
 fi
 
+# Print the inputs
+echo "Provided inputs are as follows:"
+echo "Storage Account Name: $azure_storage_account_name"
+echo "Resource Group: $azure_storage_account_rg"
+echo "TLS Version: $tls_version"
+
 # verifying tls version
 old_tls_version=$(az resource show --name $azure_storage_account_name --resource-group $azure_storage_account_rg --resource-type Microsoft.Storage/storageAccounts --query properties.minimumTlsVersion --output tsv)
 echo "The storage account $azure_storage_account_name in resource group $azure_storage_account_rg has a TLS version of $old_tls_version"
