@@ -13,6 +13,7 @@ on:
       tls_version:
         description: 'Minimum TLS version'
         required: true
+        type: choice
         default: 'TLS1_2' # Default value
         options: # Choices for TLS version
         - TLS1_0
