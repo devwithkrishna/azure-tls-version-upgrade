@@ -29,8 +29,7 @@ options {
                 sh '''
                 
                 '''
-                sh (script:"
-                az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID && \
+                sh (script:"az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID && \
                 az account show && \
                 ls && \
                 chmod +x tls_changes.sh && \
