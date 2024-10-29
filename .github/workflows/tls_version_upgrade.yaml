@@ -1,0 +1,55 @@
+name: update-tls-version
+on:
+  workflow_dispatch: # This allows manual triggering of the workflow.
+    inputs:
+      azure_storage_account_name:
+        description: 'Name of the Azure storage account'
+        required: true
+        default: 'techarchitectssa'
+      azure_storage_account_rg:
+        description: 'Azure resource group name'
+        required: true
+        default: 'ARCHITECTS-STORAGE-RG'
+      tls_version:
+        description: 'Minimum TLS version'
+        required: true
+        default: 'TLS1_2' # Default value
+        options: # Choices for TLS version
+        - TLS1_0
+        - TLS1_1
+        - TLS1_2
+
+jobs:
+  update-tls-version:
+    runs-on: ubuntu-latest # This sets up a GitHub-hosted runner.
+
+    container:
+      image: dockerofkrishnadhas/jenkins-slave-tf-deploy-jdk11-image:latest # Replace with your own Docker image.
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4 # Checks out the repository code.
+
+    - name: Set up Docker client
+      run: |
+        # Verify Docker is installed in your custom image
+        docker --version
+
+    - name: Set up Docker client
+      run: |
+        # Verify Docker is installed in your custom image
+        docker --version
+
+    - name: azure login using action
+      uses: azure/login@v1
+      with:
+        creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
+
+    - name: az account show
+      uses: azure/CLI@v1
+      with:
+        azcliversion: 2.56.0
+        inlineScript: |
+          az account show -o yaml
+          bash tls_changes.sh ${{inputs.azure_storage_account_name}} ${{inputs.azure_storage_account_rg}} ${{inputs.tls_version}}
+
