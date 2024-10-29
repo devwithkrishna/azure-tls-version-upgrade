@@ -31,11 +31,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4 # Checks out the repository code.
 
-    - name: Set up Docker client
-      run: |
-        # Verify Docker is installed in your custom image
-        docker --version
-
     - name: azure login using action
       uses: azure/login@v1
       with:
@@ -48,4 +43,5 @@ jobs:
         inlineScript: |
           az account show -o yaml
           bash tls_changes.sh ${{inputs.azure_storage_account_name}} ${{inputs.azure_storage_account_rg}} ${{inputs.tls_version}}
+
 
