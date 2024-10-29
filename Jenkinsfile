@@ -1,8 +1,7 @@
 
 pipeline{
     agent{
-        docker {image 'mcr.microsoft.com/azure-cli' 
-         args "--user root --privileged" }
+        label 'dockerofkrishnadhas'
     }
 options {
         ansiColor('xterm')
@@ -10,7 +9,7 @@ options {
     parameters {
         string(name: 'azure_storage_account_name', defaultValue: 'techarchitectssa', description: 'names of azure storage account')
         string(name: 'azure_storage_account_rg', defaultValue: 'ARCHITECTS-STORAGE-RG', description: 'azure resource group name')
-        choice(name: 'tls_version', choices: ['TLS_0', 'TLS_1', 'TLS_2'], description: 'Minimum TLS version')
+        choice(name: 'tls_version', choices: ['TLS1_0', 'TLS1_1', 'TLS1_2'], description: 'Minimum TLS version')
 
     }
     
