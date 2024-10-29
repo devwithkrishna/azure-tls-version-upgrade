@@ -37,9 +37,9 @@ jobs:
         creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
 
     - name: az account show
-      uses: azure/CLI@v1
+      uses: azure/cli@v2
       with:
-        azcliversion: 2.56.0
+        azcliversion: 2.62.0
         inlineScript: |
           az account show -o yaml
           bash tls_changes.sh ${{inputs.azure_storage_account_name}} ${{inputs.azure_storage_account_rg}} ${{inputs.tls_version}}
